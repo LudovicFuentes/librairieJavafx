@@ -1,6 +1,7 @@
 
 package application.model.beans;
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Auteur {
 	private int id;
@@ -9,6 +10,7 @@ public class Auteur {
 	private Date dateNaissance;
 	private Date dateDeces;
 	private String pays;
+	private ArrayList<Livre> listeLivre;
 	
 	public Auteur() {
 
@@ -68,6 +70,18 @@ public class Auteur {
 	public void setPays(String pays) {
 		this.pays = pays;
 	}
+
+	public ArrayList<Livre> getListeLivre() {
+		return listeLivre;
+	}
+
+
+
+	public void setListeLivre(ArrayList<Livre> listeLivre) {
+		this.listeLivre = listeLivre;
+	}
+
+
 
 	@Override
 	public String toString() {

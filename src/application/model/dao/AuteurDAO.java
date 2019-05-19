@@ -2,6 +2,7 @@
 package application.model.dao;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -93,8 +94,14 @@ import application.model.beans.Auteur;
 				Statement stmt = connect.createStatement();
 				
 				//Ici on insere le nouvel auteur
-				stmt.execute("INSERT INTO auteur VALUES ('"+obj.getNom()+"','"+obj.getPrenom()+"','"+obj.getPays()+"','"+obj.getDateNaissance()+"','"+obj.getDateDeces()+"')");
-				
+				String query = "INSERT INTO auteur (nom, prenom,pays, dateNaissance, dateDeces) VALUES (?, ?, ?, ?, ?);";
+				PreparedStatement preparedStatement = connect.prepareStatement(query);
+				preparedStatement.setString(1, obj.getNom());
+				preparedStatement.setString(2, obj.getPrenom());
+				preparedStatement.setString(3, obj.getPays());
+				preparedStatement.setDate(4, obj.getDateNaissance());
+				preparedStatement.setDate(5, obj.getDateDeces());
+				preparedStatement.execute();
 				
 				// pour récupérer l'objet que l'on vient d'insérer, cette fois avec l'ID auto-généré
 				ResultSet rs = stmt.executeQuery("Select * from auteur");
@@ -131,13 +138,18 @@ import application.model.beans.Auteur;
 		@Override
 		public Auteur update(Auteur obj) {
 			Auteur aut = new Auteur();
-			
+			// Comme pour la méthode CREATE je me sert de preparedStatement//
 
 			try {
 				Statement stmt = connect.createStatement();
-				 stmt.executeQuery("update auteur set nom=" +obj.getNom()+"',prenom='"+obj.getPrenom()+"',pays='"+obj.getPays()+"',dateNaissance='"+obj.getDateNaissance()+"',dateDeces='"+obj.getDateDeces()+
-						"'where id='"+obj.getId()+"')");
-				 ResultSet rs = stmt.executeQuery("SELECT * FROM auteur WHERE id="+obj.getId());
+					String query = "update auteur set dateDeces= ? where id= ?;";
+					PreparedStatement preparedStatement = connect.prepareStatement(query);
+					preparedStatement.setDate(1, obj.getDateDeces());
+					preparedStatement.setInt(2, obj.getId());
+					preparedStatement.execute();
+					
+			// Je me sert encore une fois de la methode select all pour tout afficher//
+				 ResultSet rs = stmt.executeQuery("SELECT * FROM auteur");
 				while (rs.next()) {
 					int bd_id = rs.getInt("id");
 					String bd_nom = rs.getString("nom");
@@ -166,30 +178,18 @@ import application.model.beans.Auteur;
 
 		@Override
 		public void delete(Auteur obj) {
-			Auteur aut = new Auteur();
+
 
 			try {
 				Statement stmt = connect.createStatement();
-				ResultSet rs = stmt.executeQuery("delete from auteur where id="+obj.getId()+";");
-				while (rs.next()) {
-					int bd_id = rs.getInt("id");
-					String bd_nom = rs.getString("nom");
-					String bd_prenom = rs.getString("prenom");
-					String bd_pays = rs.getString("pays");
-					Date bd_dateNaissance = rs.getDate("dateNaissance");
-					Date bd_dateDeces = rs.getDate("dateDeces");
+				stmt.executeQuery("delete from auteur where id="+obj.getId()+";");
+
 					
-					aut.setId(bd_id);
-					aut.setNom(bd_nom);
-					aut.setPrenom(bd_prenom);
-					aut.setPays(bd_pays);
-					aut.setDateNaissance(bd_dateNaissance);
-					aut.setDateDeces(bd_dateDeces);	
 					
-					System.out.println("Auteur supprimé avec succés!!!!");
+				System.out.println("Auteur supprimé avec succés!!!!");
 				}
 
-			}
+			
 			catch (Exception e) {
 				System.out.println("AuteurDAO: delete() failed: "+e.getLocalizedMessage());
 			}

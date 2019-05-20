@@ -4,31 +4,13 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class Auteur {
-	private int id;
 	private String nom;
 	private String prenom;
-	private Date dateNaissance;
-	private Date dateDeces;
-	private String pays;
 	private ArrayList<Livre> listeLivre;
 	
 	public Auteur() {
 
 	}
-
-
-
-	public int getId() {
-		return id;
-	}
-
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
 
 	public String getNom() {
 		return nom;
@@ -46,48 +28,21 @@ public class Auteur {
 		this.prenom = prenom;
 	}
 
-
-	public Date getDateNaissance() {
-		return dateNaissance;
-	}
-
-	public void setDateNaissance(Date dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
-
-	public Date getDateDeces() {
-		return dateDeces;
-	}
-
-	public void setDateDeces(Date dateDeces) {
-		this.dateDeces = dateDeces;
-	}
-
-	public String getPays() {
-		return pays;
-	}
-
-	public void setPays(String pays) {
-		this.pays = pays;
-	}
-
 	public ArrayList<Livre> getListeLivre() {
 		return listeLivre;
 	}
-
-
 
 	public void setListeLivre(ArrayList<Livre> listeLivre) {
 		this.listeLivre = listeLivre;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Auteur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance
-				+ ", dateDeces=" + dateDeces + ", pays=" + pays + "]";
+		return "Auteur [nom=" + nom + ", prenom=" + prenom + "]";
 	}
+
+
+
 
 
 

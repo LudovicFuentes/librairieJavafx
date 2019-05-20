@@ -33,14 +33,14 @@ import javafx.collections.ObservableList;
 					int bd_année = rs.getInt("année");
 					String bd_type = rs.getString("type");
 							
-					rs.getString("titre");
-					rs.getString("Editeur");
-					rs.getString("Auteur");
-					rs.getInt("annee");
-					rs.getString("type");
+					currentItem.setTitre(bd_titre);
+					currentItem.setEditeur(bd_editeur);
+					currentItem.setAuteur(bd_auteur);
+					currentItem.setAnnee(bd_année);
+					currentItem.setType(bd_type);
 							
 							
-							livre.add(currentItem);
+					livre.add(currentItem);
 
 				}
 

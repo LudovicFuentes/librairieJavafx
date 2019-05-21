@@ -1,8 +1,11 @@
 package application.view;
 
 import application.model.beans.Livre;
+import application.model.dao.LivreDAO;
 import application.model.dao.LivreSearchType;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -13,7 +16,7 @@ public class LivreController{
 	 @FXML
 	    private ChoiceBox<LivreSearchType> choiceBox;
 	 @FXML
-	    private TableView LivreTable;
+	    private TableView<Livre> LivreTable;
 	 @FXML
 	    private TableColumn<Livre, String>  LivTitreColumn;
 	 @FXML
@@ -29,6 +32,10 @@ public class LivreController{
 	 @FXML
 	 	private TextField tfAjouter;
 
+
+	
+	 
+	 
 	 public void initialize() {
 
 			try {	
@@ -41,10 +48,35 @@ public class LivreController{
 				
 
 			} catch(Exception e) {
-				System.out.println("PVC initialize() failed: " + e);
+				System.out.println(" initialize() failed: " + e);
 				e.printStackTrace();
 			}
 
 		}
+
+
+
+
+	    @FXML
+	    public  void HandleButtonRecherche () {
+	        String text = tfRechercher.getText();
+	    	try {
+
+	    		LivreTable.getItems().setAll(LivreDAO.find(text));
+	        	
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+
+	        }
+
+	    } 
+	    public void HandleButtonRechercherTout() {
+	    	try {
+	    		LivreTable.getItems().setAll(LivreDAO.findall());
+	    	} catch (Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    }
 
 }

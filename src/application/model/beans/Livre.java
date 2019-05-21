@@ -87,7 +87,7 @@ public class Livre {
     }
 	@Override
 	public String toString() {
-		return "Livre [titre=" + titre + ", editeur=" + editeur + ", auteur=" + auteur + ", année=" + annee + ", type="
+		return "Livre [titre=" + titre + ", editeur=" + editeur + ", auteur=" + auteur + ", annee=" + annee + ", type="
 				+ type + "]";
 	}
 

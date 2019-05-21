@@ -36,7 +36,7 @@
                      <font>
                         <Font name="System Italic" size="12.0" />
                      </font></Label>
-                  <Button layoutX="811.0" layoutY="431.0" mnemonicParsing="false" onAction="#HandleButtonAjouter" text="Ajouter" />
+                  <Button layoutX="811.0" layoutY="431.0" mnemonicParsing="false" text="Ajouter" />
                   <Button layoutX="551.0" layoutY="67.0" mnemonicParsing="false" onAction="#HandleButtonRecherche" text="trouver !!!" />
                   <Button layoutX="660.0" layoutY="67.0" mnemonicParsing="false" onAction="#HandleButtonRechercherTout" prefHeight="31.0" prefWidth="110.0" text="Afficher tout" />
                </children>

@@ -2,11 +2,10 @@ package application.view;
 
 import application.model.beans.Livre;
 import application.model.dao.LivreDAO;
-import application.model.dao.LivreSearchType;
-import javafx.event.ActionEvent;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -14,9 +13,7 @@ import javafx.scene.control.TextField;
 
 public class LivreController{
 	 @FXML
-	    private ChoiceBox<LivreSearchType> choiceBox;
-	 @FXML
-	    private TableView<Livre> LivreTable;
+	    private TableView<Livre> LivreTable = new TableView<>();
 	 @FXML
 	    private TableColumn<Livre, String>  LivTitreColumn;
 	 @FXML
@@ -28,13 +25,21 @@ public class LivreController{
 	 @FXML
 	 	private TableColumn<Livre,String> LivTypeColumn;
 	 @FXML
+		private TableColumn<Livre, Livre> LivSupprimerColumn = new TableColumn<>("Supprimer");
+	 @FXML
 	 	private TextField tfRechercher;
 	 @FXML
-	 	private TextField tfAjouter;
+	 	private TextField tfTitre;
+	 @FXML
+	 	private TextField tfAuteur;
+	 @FXML
+	 	private TextField tfAnnee;
+	 @FXML
+	 	private TextField tfEditeur;
+	 @FXML
+	 	private TextField tfType;
 
 
-	
-	 
 	 
 	 public void initialize() {
 
@@ -45,6 +50,22 @@ public class LivreController{
 				LivAnneeColumn.setCellValueFactory(cellData -> cellData.getValue().AnneeProperty().asObject());
 				LivEditeurColumn.setCellValueFactory(cellData -> cellData.getValue().EditeurProperty());
 				LivTypeColumn.setCellValueFactory(cellData -> cellData.getValue().TypeProperty());
+				LivSupprimerColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+				LivSupprimerColumn.setCellFactory(param -> new TableCell<Livre,Livre>() {
+			    private final Button deleteButton = new Button("Supprimer");
+			    @Override
+				 protected void updateItem(Livre livre, boolean empty) {
+			         super.updateItem(livre, empty);
+			         LivreDAO livredao = new LivreDAO();
+			         if (livre == null) {
+			             setGraphic(null);
+			             return;
+			         }
+			         else {
+			                setGraphic(deleteButton);
+			                deleteButton.setOnAction(event -> LivreTable.getItems().setAll(livredao.delete(livre)));			     }
+			    }
+				});
 				
 
 			} catch(Exception e) {
@@ -52,17 +73,19 @@ public class LivreController{
 				e.printStackTrace();
 			}
 
-		}
+		
+
+	 }
+
+ 
 
 
-
-
-	    @FXML
 	    public  void HandleButtonRecherche () {
-	        String text = tfRechercher.getText();
+	        String text1 = tfRechercher.getText();
+	        LivreDAO livredao = new LivreDAO();
 	    	try {
 
-	    		LivreTable.getItems().setAll(LivreDAO.find(text));
+	    		LivreTable.getItems().setAll(livredao.find(text1));
 	        	
 
 	        } catch (Exception e) {
@@ -72,11 +95,36 @@ public class LivreController{
 
 	    } 
 	    public void HandleButtonRechercherTout() {
+	        LivreDAO livredao = new LivreDAO();
 	    	try {
-	    		LivreTable.getItems().setAll(LivreDAO.findall());
+	    		LivreTable.getItems().setAll(livredao.findall());
 	    	} catch (Exception e) {
 	    		e.printStackTrace();
 	    	}
 	    }
 
+
+	    public  void HandleButtonAjouter () {
+			int annee = Integer.valueOf(tfAnnee.getText());
+	        LivreDAO livredao = new LivreDAO();
+	    	try {
+	    		Livre livre = new Livre();
+	    		
+	    		livre.setTitre(tfTitre.getText());
+	    		livre.setAuteur(tfAuteur.getText());
+	    		livre.setAnnee(annee);
+	    		livre.setEditeur(tfEditeur.getText());
+	    		livre.setType(tfType.getText());
+	    		
+
+	    		
+	    		livredao.Create(livre);
+	    		
+	    		LivreTable.getItems().setAll(livre);
+	    		
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+
+	        }
+	    }
 }

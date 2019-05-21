@@ -14,7 +14,8 @@ import javafx.collections.ObservableList;
 
 	public class LivreDAO extends  DAO<Livre> {
 		
-		public static ObservableList <Livre> find ( Object value) {
+
+		public  ObservableList <Livre> find(Object value) {
 			String valueClause = value.toString();
 			ObservableList <Livre> listliv = FXCollections.observableArrayList();
 		
@@ -49,8 +50,8 @@ import javafx.collections.ObservableList;
 				
 			}
 
-			
-			public static ObservableList <Livre> findall () {
+			@Override
+			public  ObservableList <Livre> findall() {
 
 				ObservableList <Livre> listliv = FXCollections.observableArrayList();
 			
@@ -84,43 +85,53 @@ import javafx.collections.ObservableList;
 					return null;
 					
 				}
+@Override
+			public ObservableList <Livre> Create (Livre Obj) {
 
-			@Override
-			public Livre create(Livre obj) {
 				try {
-					Statement stmt = connect.createStatement();
 					
 					//Ici on insere le nouvel auteur
-					String query = "INSERT INTO livre (titre, editeur ,année, type) VALUES ('?', '?', '?', '?');";
-					PreparedStatement preparedStatement = connect.prepareStatement(query);
-					preparedStatement.setString(1, obj.getTitre());
-					preparedStatement.setString(2, obj.getEditeur());
-					preparedStatement.setInt(3, obj.getAnnee());
-					preparedStatement.setString(4, obj.getType());
+					PreparedStatement preparedStatement = connect.prepareStatement("INSERT INTO livre(titre,auteur,annee,editeur,type) VALUES ( ?, ?, ?, ?, ?)");
+					preparedStatement .setString( 1, Obj.getTitre() );   
+					preparedStatement .setString( 2, Obj.getAuteur() );   
+					preparedStatement .setInt( 3, Obj.getAnnee() );   
+					preparedStatement .setString( 4, Obj.getEditeur() );   
+					preparedStatement .setString( 5, Obj.getType() );   
+					preparedStatement .executeUpdate();
+							
 					preparedStatement.execute();
 					
-					// pour récupérer l'objet que l'on vient d'insérer, cette fois avec l'ID auto-généré
-					ResultSet rs = stmt.executeQuery("Select * from livre");
+					ObservableList <Livre> listliv = FXCollections.observableArrayList();
 					
-					//Je me place sur la dernière ligne
-					rs.last();
-					
-					//Puis je fais comme avant (comme pour find() et findByName() )
-					Livre liv = new Livre();
-					String bd_titre = rs.getString("titre");
-					String bd_editeur = rs.getString("editeur");
-					String bd_auteur = rs.getString("auteur");
-					int bd_année = rs.getInt("annee");
-					String bd_type = rs.getString("type");
 
-					liv.setTitre(bd_titre);
-					liv.setEditeur(bd_editeur);
-					liv.setAuteur(bd_auteur);
-					liv.setAnnee(bd_année);
-					liv.setType(bd_type);
-					return liv;
+						Statement stmt = connect.createStatement();
+						ResultSet rs = stmt.executeQuery("select * from livre") ;
+						while (rs.next()) {
+							Livre liv = new Livre();
+							String bd_titre = rs.getString("titre");
+							String bd_editeur = rs.getString("editeur");
+							String bd_auteur = rs.getString("auteur");
+							int bd_année = rs.getInt("annee");
+							String bd_type = rs.getString("type");
+
+							liv.setTitre(bd_titre);
+							liv.setEditeur(bd_editeur);
+							liv.setAuteur(bd_auteur);
+							liv.setAnnee(bd_année);
+							liv.setType(bd_type);
+
+							
+							listliv.add(liv);
+						}
+						
+						return listliv;
+
+
+					
+
 				
-				}
+
+			}
 				catch (Exception e) {
 					System.out.println("LivreDAO: create() failed: "+e.getLocalizedMessage());
 				}
@@ -130,7 +141,7 @@ import javafx.collections.ObservableList;
 			}
 
 			@Override
-			public Livre update(Livre obj) {
+			public ObservableList<Livre> update(Livre obj) {
 				// TODO Auto-generated method stub
 				return null;
 			}
@@ -138,25 +149,48 @@ import javafx.collections.ObservableList;
 			
 
 			@Override
-			public void delete(Livre obj) {
+			public  ObservableList <Livre>  delete(Livre obj) {
 
 
 				try {
 					Statement stmt = connect.createStatement();
-					stmt.executeQuery("delete from auteur where id="+obj.getTitre()+";");
+					stmt.executeUpdate("delete from livre where titre='"+obj.getTitre()+"';");
+
+					ObservableList <Livre> listliv = FXCollections.observableArrayList();
+					
+
+					ResultSet rs = stmt.executeQuery("select * from livre") ;
+					while (rs.next()) {
+						Livre liv = new Livre();
+						String bd_titre = rs.getString("titre");
+						String bd_editeur = rs.getString("editeur");
+						String bd_auteur = rs.getString("auteur");
+						int bd_année = rs.getInt("annee");
+						String bd_type = rs.getString("type");
+
+						liv.setTitre(bd_titre);
+						liv.setEditeur(bd_editeur);
+						liv.setAuteur(bd_auteur);
+						liv.setAnnee(bd_année);
+						liv.setType(bd_type);
 
 						
+						listliv.add(liv);
+					}
+					
+					return listliv;
 						
-					System.out.println("Livre supprimé avec succés!!!!");
 					}
 
 				
 				catch (Exception e) {
 					System.out.println("LivreDAO: delete() failed: "+e.getLocalizedMessage());
 				}
-				
+				return null;
 
 			}
+
+			
 				
 			}
 

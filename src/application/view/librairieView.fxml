@@ -39,16 +39,6 @@
                   <Button layoutX="811.0" layoutY="431.0" mnemonicParsing="false" onAction="#HandleButtonAjouter" text="Ajouter" />
                   <Button layoutX="551.0" layoutY="67.0" mnemonicParsing="false" onAction="#HandleButtonRecherche" text="trouver !!!" />
                   <Button layoutX="660.0" layoutY="67.0" mnemonicParsing="false" onAction="#HandleButtonRechercherTout" prefHeight="31.0" prefWidth="110.0" text="Afficher tout" />
-                  <TextField fx:id="tfTitre" layoutX="269.0" layoutY="349.0" />
-                  <Label layoutX="208.0" layoutY="354.0" prefHeight="21.0" prefWidth="88.0" text="Titre" />
-                  <TextField fx:id="tfAuteur" layoutX="269.0" layoutY="393.0" />
-                  <TextField fx:id="tfEditeur" layoutX="583.0" layoutY="349.0" />
-                  <TextField fx:id="tfAnnee" layoutX="269.0" layoutY="441.0" />
-                  <TextField fx:id="tfType" layoutX="583.0" layoutY="393.0" />
-                  <Label layoutX="208.0" layoutY="398.0" text="Auteur" />
-                  <Label layoutX="208.0" layoutY="446.0" text="Anneé" />
-                  <Label layoutX="526.0" layoutY="353.0" text="Editeur" />
-                  <Label layoutX="533.0" layoutY="398.0" text="Type" />
                </children>
             </AnchorPane>
         </content>

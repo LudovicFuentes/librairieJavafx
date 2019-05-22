@@ -14,15 +14,18 @@ import javafx.collections.ObservableList;
 
 	public class LivreDAO extends  DAO<Livre> {
 		
-
+//Creation d'une methode find de paramétre Object value qui permettra de pouvoir mettre le value clause à plusieur endroit, etant donnée//
+//que nous effectuons une recherche sur plusieurs element de la table mais avec 1 seul textfield//
 		public  ObservableList <Livre> find(Object value) {
 			String valueClause = value.toString();
+			//Creation de l'observablelist utile pour pouvoir mettre les informations dans le table view//
 			ObservableList <Livre> listliv = FXCollections.observableArrayList();
 		
 				try {
 					Statement stmt = connect.createStatement();
 					ResultSet rs = stmt.executeQuery("select * from livre where titre= '"+valueClause+"' or  auteur= '"+valueClause+"'or editeur= '"+valueClause+"' or annee='"+valueClause+"'or type='"+valueClause+"';");
 					while (rs.next()) {
+						//Creation d'un objet livre qui va permettre de recupérer les valeurs de la BDD//
 						Livre liv = new Livre();
 						String bd_titre = rs.getString("titre");
 						String bd_editeur = rs.getString("editeur");
@@ -50,6 +53,8 @@ import javafx.collections.ObservableList;
 				
 			}
 
+		
+// Creation de la methode findall qui herite de DAO//
 			@Override
 			public  ObservableList <Livre> findall() {
 
@@ -85,12 +90,13 @@ import javafx.collections.ObservableList;
 					return null;
 					
 				}
+// Methode pour creer un objet livre qui herite de DAO//
 			@Override
 			public ObservableList <Livre> Create (Livre Obj) {
 
 				try {
 					
-					//Ici on insere le nouvel auteur
+					//Ici on insere le nouveau livre//
 					PreparedStatement preparedStatement = connect.prepareStatement("INSERT INTO livre(titre,auteur,annee,editeur,type) VALUES ( ?, ?, ?, ?, ?)");
 					preparedStatement .setString( 1, Obj.getTitre() );   
 					preparedStatement .setString( 2, Obj.getAuteur() );   
@@ -122,7 +128,7 @@ import javafx.collections.ObservableList;
 			}
 
 			
-
+// Creation de la methode Supprimer qui herite de DAO//
 			@Override
 			public  ObservableList <Livre>  delete(Livre obj) {
 

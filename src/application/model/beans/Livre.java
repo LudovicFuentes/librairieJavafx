@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Livre {
-
+// Creation des variables de la classe Livre en String ou Int Property pour coller avec les caractéristique de TableView de javafx//
 	private StringProperty titre;
 	private StringProperty editeur;
 	private StringProperty auteur;
@@ -17,7 +17,7 @@ public class Livre {
 	
 	
 	
-
+// Creation d'une methode livre//
 	public Livre() {
 		super();
 		this.titre = new SimpleStringProperty();
@@ -28,7 +28,7 @@ public class Livre {
 	}
 	
 
-
+//Generations des Getters et Setters//
 	public String getTitre () {
         return titre.get();
     }
@@ -36,7 +36,6 @@ public class Livre {
     public void setTitre(String Titre){
         this.titre.set(Titre);
     }
- 
     public StringProperty TitreProperty() {
         return titre;
     }
@@ -85,6 +84,7 @@ public class Livre {
     public StringProperty TypeProperty() {
         return type;
     }
+//Generation de la methode ToString pour que le resultat soit lisible par l'utilisateur//
 	@Override
 	public String toString() {
 		return "Livre [titre=" + titre + ", editeur=" + editeur + ", auteur=" + auteur + ", annee=" + annee + ", type="

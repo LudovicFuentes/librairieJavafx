@@ -50,11 +50,15 @@ public class LivreController{
 				LivAnneeColumn.setCellValueFactory(cellData -> cellData.getValue().AnneeProperty().asObject());
 				LivEditeurColumn.setCellValueFactory(cellData -> cellData.getValue().EditeurProperty());
 				LivTypeColumn.setCellValueFactory(cellData -> cellData.getValue().TypeProperty());
+				
+// Nous Voulons creer une colonne avec un bouton Supprimer on paramétre une nouvelle colonne du tableau avec des parametre specifique//	
 				LivSupprimerColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 				LivSupprimerColumn.setCellFactory(param -> new TableCell<Livre,Livre>() {
 			    private final Button deleteButton = new Button("Supprimer");
+			    
+// Methode qui permet d'afficher le bouton si la ligne est vide ou non //			    
 			    @Override
-				 protected void updateItem(Livre livre, boolean empty) {
+				protected void updateItem(Livre livre, boolean empty) {
 			         super.updateItem(livre, empty);
 			         LivreDAO livredao = new LivreDAO();
 			         if (livre == null) {
@@ -79,7 +83,7 @@ public class LivreController{
 
  
 
-
+// Methode qui definie le comportement du bouton lier à find() du DAO//
 	    public  void HandleButtonRecherche () {
 	        String text1 = tfRechercher.getText();
 	        LivreDAO livredao = new LivreDAO();
@@ -95,6 +99,7 @@ public class LivreController{
 	        }
 	    	
 	    } 
+	 // Methode qui definie le comportement du bouton lier à findall() du DAO//
 	    public void HandleButtonRechercherTout() {
 	        LivreDAO livredao = new LivreDAO();
 	    	try {
@@ -104,7 +109,7 @@ public class LivreController{
 	    	}
 	    }
 
-
+	 // Methode qui definie le comportement du bouton lier à create() du DAO//
 	    public  void HandleButtonAjouter () {
 			int annee = Integer.valueOf(tfAnnee.getText());
 	        LivreDAO livredao = new LivreDAO();

@@ -99,33 +99,8 @@ import javafx.collections.ObservableList;
 					preparedStatement .setString( 5, Obj.getType() );   
 					preparedStatement .executeUpdate();
 							
-					preparedStatement.execute();
-					
-					ObservableList <Livre> listliv = FXCollections.observableArrayList();
-					
-
-						Statement stmt = connect.createStatement();
-						ResultSet rs = stmt.executeQuery("select * from livre") ;
-						while (rs.next()) {
-							Livre liv = new Livre();
-							String bd_titre = rs.getString("titre");
-							String bd_editeur = rs.getString("editeur");
-							String bd_auteur = rs.getString("auteur");
-							int bd_année = rs.getInt("annee");
-							String bd_type = rs.getString("type");
-
-							liv.setTitre(bd_titre);
-							liv.setEditeur(bd_editeur);
-							liv.setAuteur(bd_auteur);
-							liv.setAnnee(bd_année);
-							liv.setType(bd_type);
-
-							
-							listliv.add(liv);
-						}
+					connect.prepareStatement("select * from livre") ;
 						
-						return listliv;
-
 
 					
 

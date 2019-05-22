@@ -88,11 +88,12 @@ public class LivreController{
 	    		LivreTable.getItems().setAll(livredao.find(text1));
 	        	
 
+
 	        } catch (Exception e) {
 	            e.printStackTrace();
 
 	        }
-
+	    	
 	    } 
 	    public void HandleButtonRechercherTout() {
 	        LivreDAO livredao = new LivreDAO();
@@ -104,5 +105,27 @@ public class LivreController{
 	    }
 
 
-	   
+	    public  void HandleButtonAjouter () {
+			int annee = Integer.valueOf(tfAnnee.getText());
+	        LivreDAO livredao = new LivreDAO();
+	    	try {
+	    		Livre livre = new Livre();
+	    		
+	    		livre.setTitre(tfTitre.getText());
+	    		livre.setAuteur(tfAuteur.getText());
+	    		livre.setAnnee(annee);
+	    		livre.setEditeur(tfEditeur.getText());
+	    		livre.setType(tfType.getText());
+	    		
+
+	    		
+	    		livredao.Create(livre);
+	    		
+	    		LivreTable.getItems().setAll(livre);
+	    		
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+
+	        }
+	    }
 }

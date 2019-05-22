@@ -90,7 +90,7 @@ import javafx.collections.ObservableList;
 					return null;
 					
 				}
-// Methode pour creer un objet livre qui herite de DAO//
+// Methode pour creer qui herite de DAO//
 			@Override
 			public ObservableList <Livre> Create (Livre Obj) {
 

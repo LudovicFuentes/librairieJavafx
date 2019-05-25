@@ -1,5 +1,6 @@
 package application.view;
 
+
 import application.model.beans.Livre;
 import application.model.dao.LivreDAO;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -9,9 +10,10 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 
-public class LivreController{
+public class LivreController {
 	 @FXML
 	    private TableView<Livre> LivreTable = new TableView<>();
 	 @FXML
@@ -45,13 +47,13 @@ public class LivreController{
 
 			try {	
 
-				LivTitreColumn.setCellValueFactory(cellData -> cellData.getValue().TitreProperty());
-				LivAuteurColumn.setCellValueFactory(cellData -> cellData.getValue().AuteurProperty());
-				LivAnneeColumn.setCellValueFactory(cellData -> cellData.getValue().AnneeProperty().asObject());
-				LivEditeurColumn.setCellValueFactory(cellData -> cellData.getValue().EditeurProperty());
-				LivTypeColumn.setCellValueFactory(cellData -> cellData.getValue().TypeProperty());
+				LivTitreColumn.setCellValueFactory(new PropertyValueFactory<Livre, String>("Titre"));;
+				LivAuteurColumn.setCellValueFactory(new PropertyValueFactory<Livre, String>("Auteur"));
+				LivAnneeColumn.setCellValueFactory(new PropertyValueFactory<Livre, Integer>("Annee"));
+				LivEditeurColumn.setCellValueFactory(new PropertyValueFactory<Livre, String>("Editeur"));
+				LivTypeColumn.setCellValueFactory(new PropertyValueFactory<Livre, String>("Type"));
 				
-// Nous Voulons creer une colonne avec un bouton Supprimer on paramétre une nouvelle colonne du tableau avec des parametre specifique//	
+// Nous Voulons creer une colonne avec un bouton Supprimer on paramÃ©tre une nouvelle colonne du tableau avec des parametre specifique//	
 				LivSupprimerColumn.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 				LivSupprimerColumn.setCellFactory(param -> new TableCell<Livre,Livre>() {
 			    private final Button deleteButton = new Button("Supprimer");
@@ -83,7 +85,7 @@ public class LivreController{
 
  
 
-// Methode qui definie le comportement du bouton lier à find() du DAO//
+// Methode qui definie le comportement du bouton lier Ã  find() du DAO//
 	    public  void HandleButtonRecherche () {
 	        String text1 = tfRechercher.getText();
 	        LivreDAO livredao = new LivreDAO();
@@ -99,7 +101,7 @@ public class LivreController{
 	        }
 	    	
 	    } 
-	 // Methode qui definie le comportement du bouton lier à findall() du DAO//
+	 // Methode qui definie le comportement du bouton lier Ã  findall() du DAO//
 	    public void HandleButtonRechercherTout() {
 	        LivreDAO livredao = new LivreDAO();
 	    	try {
@@ -109,7 +111,7 @@ public class LivreController{
 	    	}
 	    }
 
-	 // Methode qui definie le comportement du bouton lier à create() du DAO//
+	 // Methode qui definie le comportement du bouton lier Ã  create() du DAO//
 	    public  void HandleButtonAjouter () {
 			int annee = Integer.valueOf(tfAnnee.getText());
 	        LivreDAO livredao = new LivreDAO();

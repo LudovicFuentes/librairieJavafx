@@ -1,9 +1,6 @@
 package application;
 	
 
-
-
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -16,9 +13,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-		//On charge le FXML, qui lui meme va intancier son contrôleur
+		//On charge le FXML, qui lui meme va intancier son contrÃ´leur
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("view/librairieView.fxml"));		
+		loader.setLocation(Main.class.getResource("view/Bonjour.fxml"));		
 		AnchorPane root = (AnchorPane) loader.load();
 	    
 
@@ -35,5 +32,6 @@ public static void main(String[] args) {
 launch(args);
 }
 }
+
 
 	

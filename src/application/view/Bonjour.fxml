@@ -4,9 +4,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.QuadCurve?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="666.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.BonjourController">
+<AnchorPane prefHeight="666.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.view.BonjourController">
    <children>
       <TitledPane animated="false" prefHeight="666.0" prefWidth="846.0" text="Bienvenue" textFill="#171717">
         <content>
@@ -17,18 +19,23 @@
                         <Font name="System Italic" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="48.0" layoutY="47.0" prefHeight="79.0" prefWidth="705.0" text="Bienvenue sur votre librairie ">
+                  <Label alignment="CENTER" layoutX="135.0" layoutY="63.0" prefHeight="79.0" prefWidth="593.0" text="Bienvenue sur votre librairie online">
                      <font>
-                        <Font name="System Bold Italic" size="45.0" />
+                        <Font size="35.0" />
                      </font>
                   </Label>
-                  <Label layoutX="154.0" layoutY="139.0" prefHeight="42.0" prefWidth="248.0" text="choisissez votre librairie :" />
-                  <Button fx:id="LivreButton" layoutX="278.0" layoutY="286.0" mnemonicParsing="false" onAction="#HandleButtonLivre" prefHeight="31.0" prefWidth="246.0" text="Librairie Ombre Blanche" />
-                  <Button fx:id="TruthButton" layoutX="48.0" layoutY="543.0" mnemonicParsing="false" onAction="#HandleButtonTruth" prefHeight="44.0" prefWidth="173.0" text="Apprendre la vérité " />
+                  <Label layoutX="332.0" layoutY="213.0" prefHeight="42.0" prefWidth="248.0" text="Choissisez votre librairie à gérer :">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font></Label>
+                  <Button fx:id="LivreButton" layoutX="327.0" layoutY="282.0" mnemonicParsing="false" onAction="#HandleButtonLivre" prefHeight="29.0" prefWidth="209.0" text="Librairie Ombre Blanche " />
+                  <Button fx:id="TruthButton" layoutX="48.0" layoutY="558.0" mnemonicParsing="false" onAction="#HandleButtonTruth" prefHeight="29.0" prefWidth="132.0" text="Apprendre la vérité ?" />
+                  <Circle fill="#f57803" layoutX="708.0" layoutY="109.0" radius="6.0" stroke="#363636" strokeType="INSIDE" strokeWidth="0.0" />
+                  <QuadCurve controlX="-629.0" controlY="-399.0" endX="550.0" endY="152.0" fill="#bac9d7" layoutX="315.0" layoutY="440.0" startX="-371.0" startY="-86.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <QuadCurve controlX="-173.88485717773438" controlY="-210.1342315673828" endX="17.0" endY="21.0" fill="#bac9d7" layoutX="189.0" layoutY="62.0" rotate="141.2" startX="-334.8180236816406" startY="1.2247604131698608" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
                </children>
             </AnchorPane>
         </content>
       </TitledPane>
    </children>
 </AnchorPane>
-

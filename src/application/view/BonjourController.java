@@ -24,17 +24,7 @@ public class BonjourController {
            e.printStackTrace();
           }
 }
-	public void HandleButtonAuteur() {
-        try {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Auteur.fxml"));
-                Parent root2 = (Parent) fxmlLoader.load();
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root2));  
-                stage.show();
-        } catch(Exception e) {
-           e.printStackTrace();
-          }
-	}
+
 	public void HandleButtonTruth() {
         try {
         	Image image = new Image(new FileInputStream("C:\\Users\\LFuentes\\Desktop\\truth.png"));  

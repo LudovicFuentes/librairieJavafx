@@ -1,107 +1,77 @@
-
 package application.model.beans;
 
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 public class Livre {
-// Creation des variables de la classe Livre en String ou Int Property pour coller avec les caractéristique de TableView de javafx//
-	private StringProperty titre;
-	private StringProperty editeur;
-	private StringProperty auteur;
-	private IntegerProperty annee;
-	private StringProperty type;
+
+	private String titre;
+	private String editeur;
+	private String auteur;
+	private Integer annee;
+	private String type;
 	
 	
 	
 // Creation d'une methode livre//
 	public Livre() {
-		super();
-		this.titre = new SimpleStringProperty();
-		this.editeur = new SimpleStringProperty();
-		this.auteur = new SimpleStringProperty();
-		this.annee = new SimpleIntegerProperty();
-		this.type = new SimpleStringProperty();
+
 	}
 	
 
 //Generations des Getters et Setters//
-	public String getTitre () {
-        return titre.get();
-    }
- 
-    public void setTitre(String Titre){
-        this.titre.set(Titre);
-    }
-    public StringProperty TitreProperty() {
-        return titre;
-    }
-
-	public String getEditeur () {
-        return editeur.get();
-    }
- 
-    public void setEditeur(String Editeur){
-        this.editeur.set(Editeur);
-    }
- 
-    public StringProperty EditeurProperty() {
-        return editeur;
-    }
-	public String getAuteur() {
-        return auteur.get();
-    }
- 
-    public void setAuteur(String Auteur){
-        this.auteur.set(Auteur);
-    }
- 
-    public StringProperty AuteurProperty() {
-        return auteur;
-    }
-	public int getAnnee () {
-        return annee.get();
-    }
- 
-    public void setAnnee(int Annee){
-        this.annee.set(Annee);
-    }
- 
-    public IntegerProperty AnneeProperty() {
-        return annee;
-    }
-	public String getType() {
-        return type.get();
-    }
- 
-    public void setType(String Type){
-        this.type.set(Type);
-    }
- 
-    public StringProperty TypeProperty() {
-        return type;
-    }
-//Generation de la methode ToString pour que le resultat soit lisible par l'utilisateur//
-	@Override
-	public String toString() {
-		return "Livre [titre=" + titre + ", editeur=" + editeur + ", auteur=" + auteur + ", annee=" + annee + ", type="
-				+ type + "]";
+	
+	public String getTitre() {
+		return titre;
 	}
 
 
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
 
+	public String getEditeur() {
+		return editeur;
+	}
 
 
+	public void setEditeur(String editeur) {
+		this.editeur = editeur;
+	}
 
 
+	public String getAuteur() {
+		return auteur;
+	}
 
-	
+
+	public void setAuteur(String auteur) {
+		this.auteur = auteur;
+	}
 
 
+	public Integer getAnnee() {
+		return annee;
+	}
 
-	
-}
+
+	public void setAnnee(Integer annee) {
+		this.annee = annee;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	//Generation de la methode ToString pour que le resultat soit lisible par l'utilisateur//
+		@Override
+		public String toString() {
+			return "Livre [titre=" + titre + ", editeur=" + editeur + ", auteur=" + auteur + ", annee=" + annee + ", type="
+					+ type + "]";
+		}
